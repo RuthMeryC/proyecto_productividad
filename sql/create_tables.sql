@@ -34,12 +34,12 @@ CREATE TABLE horas_extra_raw(
 CREATE TABLE reporte_cliente_raw (
     agente VARCHAR(100),
     fecha DATE NOT NULL,
-    activo DECIMAL(5,5),
-    baño DECIMAL(5,5),
-    capacitacion DECIMAL(5,5),
-    break_t DECIMAL(5,5),
-    urgencia DECIMAL(5,5),
-    off_t DECIMAL(5,5)
+    activo DECIMAL(5,2),
+    baño DECIMAL(5,2),
+    capacitacion DECIMAL(5,2),
+    break_t DECIMAL(5,2),
+    urgencia DECIMAL(5,2),
+    off_t DECIMAL(5,2)
 );
 /* =====================================================
    TABLA DE NEGOCIO
