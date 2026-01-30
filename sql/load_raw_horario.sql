@@ -1,0 +1,41 @@
+USE DB_OPERACIONES;
+GO
+-- Tabla staging
+CREATE TABLES horario_stg(
+    DNI INT,
+	NOMBRE VARCHAR(50),
+	SUPERVISOR VARCHAR(50),
+	TURNO_HORA_CHILE VARCHAR(15),
+	HORA_PERU VARCHAR(15),
+	ESTADO VARCHAR(15),
+	FECHA DATE,
+	HORA_INGRESO VARCHAR(15),
+	HORA_SALIDA VARCHAR(15),
+	HORAS_TOTAL DECIMAL(4,2)
+);
+-- Carga desde CSV
+BULK INSERT horario_stg
+FROM 'D:\BD_PROYECTO\HORARIO_C1\Horario_C1_1.csv'
+WITH(
+    FIRSTROW=2,
+    FIELDTERMINATOR=';',
+    ROWTERMINATOR='\n',
+    CODEPAGE='65001'
+);
+--Paso a RAW
+INSERT INTO horario_raw(
+    dni,
+    nombre,
+    supervisor,
+    estado,
+    fecha,
+    horas_programadas
+)
+SELECT
+    DNI,
+	NOMBRE,
+	SUPERVISOR,
+	ESTADO,
+	FECHA,
+	HORAS_TOTAL
+FROM horario_stg;
